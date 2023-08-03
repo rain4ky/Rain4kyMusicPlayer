@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Rain4kyMusicPlayer</string>
+    <string name="test_sus">yes i did it!</string>
+    <string name="Imp">导入</string>
+    <string name="test_name_of_songs">歌曲名称</string>
+    <string name="play">play</string>
+    <string name="pause">pause</string>
+    <string name="single">single</string>
+    <string name="shuffle">shuffle</string>
+    <string name="loop">loop</string>
+    <string name="Return">return</string>
+    <string name="sing_name">歌曲名称</string>
+    <string name="singer_name">歌手/乐队名</string>
+    <string name="sing_length">00:00</string>
+    <string name="next">next</string>
+    <string name="last">last</string>
+    <string name="time">00:00</string>
+    <string name="raw_percent">%</string>
+    <string name="description">description</string>
+</resources>
