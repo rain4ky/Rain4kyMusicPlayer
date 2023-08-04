@@ -7,13 +7,18 @@
     android:layout_height="70dp"
     android:clickable="true"
     android:orientation="horizontal">
-    <ImageView
-        android:contentDescription="@string/description"
-        android:id="@+id/sing_image"
-        tools:ignore="SpeakableTextPresentCheck"
+    <LinearLayout
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/ic_launcher"/>
+        android:gravity="center">
+        <com.example.rain4kymusicplayer.CircleImageView
+            android:contentDescription="@string/description"
+            android:id="@+id/sing_image"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/cover"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
