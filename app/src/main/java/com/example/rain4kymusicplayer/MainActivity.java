@@ -107,10 +107,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId()==R.id.play_pause) {
             pp_i=1-pp_i;
             if(pp_i==0){
-                play_pause.setImageResource(R.drawable.ic_play_bar_btn_play);
+                play_pause.setImageResource(R.drawable.baseline_play_circle_outline_24);
                 song_player.pause();
             } else {
-                play_pause.setImageResource(R.drawable.ic_play_bar_btn_pause);
+                play_pause.setImageResource(R.drawable.baseline_pause_circle_outline_24);
                 song_player.start();
             }
         } else if (view.getId()==R.id.next_song) {
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 play_music(r);
             } else {
                 song_player.stop();
-                play_pause.setImageResource(R.drawable.ic_play_bar_btn_play);
+                play_pause.setImageResource(R.drawable.baseline_play_circle_outline_24);
                 if ((song_play_i + 1) == R_sing_list.size()) {
                     play_music(0);
                 } else {
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 end_of_song(p);
             });
             music_seekbar.setMax(song_player.getDuration());
-            play_pause.setImageResource(R.drawable.ic_play_bar_btn_pause);
+            play_pause.setImageResource(R.drawable.baseline_pause_circle_outline_24);
             timer =new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void end_of_song(int p){
         song_player.stop();
-        play_pause.setImageResource(R.drawable.ic_play_bar_btn_play);
+        play_pause.setImageResource(R.drawable.baseline_play_circle_outline_24);
         switch (ssl_button_i) {
             case 0 -> play_music(p);
             case 1 -> {

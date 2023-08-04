@@ -93,7 +93,7 @@
             android:id="@+id/play_pause"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_play_bar_btn_play"
+            android:src="@drawable/baseline_play_circle_outline_24"
             android:background="@color/black1"/>
         <ImageButton
             tools:ignore="SpeakableTextPresentCheck"
