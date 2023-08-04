@@ -5,4 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white1">#F0F0F0F0</color>
     <color name="red">#FFFF0000</color>
+    <color name="cover_blue">#FF85A4AC</color>
+    <color name="cover_green">#FF85C48C</color>
+    <color name="no_color">#00FFFFFF</color>
 </resources>

@@ -8,11 +8,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/black1"
+        android:background="@drawable/bgcolor"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/title"
             android:text="@string/app_name"
+            android:textSize="20sp"
+            android:textStyle="italic"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_width="0dp"
@@ -24,7 +26,7 @@
             android:layout_width="65dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_menu"
-            android:background="@color/black1" />
+            android:background="@color/no_color"/>
     </LinearLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresher"
@@ -34,18 +36,21 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sing_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/bgcolor2"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/bgcolor">
         <TextView
             android:id="@+id/sing_time_now"
             android:layout_width="46dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/time" />
+            android:text="@string/time"
+            android:textColor="@color/white"/>
         <SeekBar
             android:id="@+id/music_seekbar"
             android:layout_width="0dp"
@@ -56,19 +61,20 @@
             android:text="@string/time"
             android:gravity="center"
             android:layout_width="46dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:orientation="horizontal"
-        android:background="@color/black1">
+        android:background="@drawable/bgcolor">
         <ImageButton
             tools:ignore="SpeakableTextPresentCheck"
             android:id="@+id/ssl_button"
             android:src="@drawable/ic_play_btn_loop"
-            android:background="@color/black1"
+            android:background="@color/no_color"
             android:layout_width="50dp"
             android:layout_height="match_parent"/>
         <TextView
@@ -77,6 +83,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/test_name_of_songs"
+            android:textSize="20sp"
             android:textColor="@color/white"
             android:gravity="center"/>
 
@@ -85,7 +92,7 @@
             tools:ignore="SpeakableTextPresentCheck"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:background="@color/black1"
+            android:background="@color/no_color"
             android:src="@drawable/ic_play_bar_btn_last" />
 
         <ImageButton
@@ -94,13 +101,13 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/baseline_play_circle_outline_24"
-            android:background="@color/black1"/>
+            android:background="@color/no_color"/>
         <ImageButton
             tools:ignore="SpeakableTextPresentCheck"
             android:id="@+id/next_song"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_play_bar_btn_next"
-            android:background="@color/black1"/>
+            android:background="@color/no_color"/>
     </LinearLayout>
 </LinearLayout>
