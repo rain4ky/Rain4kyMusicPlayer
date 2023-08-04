@@ -45,10 +45,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    String[] permissions={Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.MOUNT_FORMAT_FILESYSTEMS,
-            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
-            Manifest.permission.READ_MEDIA_AUDIO};
+    String[] permissions={Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, Manifest.permission.READ_MEDIA_AUDIO};
     TextView sing_name_now,sing_time_end,sing_time_now;
     SeekBar music_seekbar;
     ImageButton input_button,ssl_button,last_song,play_pause,next_song;
