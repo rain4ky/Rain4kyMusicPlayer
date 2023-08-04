@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SQLiteOpenHelper My_sql_helper;SQLiteDatabase sqliteDatabase;
     MediaPlayer song_player=new MediaPlayer();
     Timer timer;
-    int ssl_button_i=1,pp_i=1,seek_on_change=0,song_play_i=0;
+    int ssl_button_i=1,pp_i=1,song_play_i=0;
+    boolean seek_on_change=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,15 +81,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             get_music();
         } else if (view.getId()==R.id.ssl_button) {
             ssl_button_i=(ssl_button_i+1)%3;
-            if (ssl_button_i == 0){
-                ssl_button.setImageResource(R.drawable.ic_play_btn_single);
-                song_player.setLooping(true);
-            } else if (ssl_button_i==1) {
-                ssl_button.setImageResource(R.drawable.ic_play_btn_loop);
-                song_player.setLooping(false);
-            }else {
-                ssl_button.setImageResource(R.drawable.ic_play_btn_shuffle);
-                song_player.setLooping(false);
+            switch (ssl_button_i) {
+                case 0 -> {
+                    ssl_button.setImageResource(R.drawable.ic_play_btn_single);
+                    song_player.setLooping(true);
+                }
+                case 1 -> {
+                    ssl_button.setImageResource(R.drawable.ic_play_btn_loop);
+                    song_player.setLooping(false);
+                }
+                default -> {
+                    ssl_button.setImageResource(R.drawable.ic_play_btn_shuffle);
+                    song_player.setLooping(false);
+                }
             }
         } else if (view.getId()==R.id.last_song) {
             if(ssl_button_i!=2){
@@ -124,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     play_music(song_play_i + 1);
                 }
-                play_pause.setImageResource(R.drawable.ic_play_bar_btn_pause);
             }
         }
     }
@@ -160,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
     public void play_music(int p){
-        seek_on_change=1;
+        seek_on_change=true;
         song_play_i=p;
         Sing sing = R_sing_list.get(p);
         sing_name_now.setText(sing.getSing_name());
@@ -171,9 +175,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             song_player.setDataSource(sing.getPath());
             song_player.prepare();
             song_player.start();
-            seek_on_change=0;
+            seek_on_change=false;
             song_player.setOnCompletionListener(mediaPlayer -> {
-                seek_on_change=1;
+                seek_on_change=true;
                 end_of_song(p);
             });
             music_seekbar.setMax(song_player.getDuration());
@@ -182,11 +186,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (seek_on_change==0){music_seekbar.setProgress(song_player.getCurrentPosition());}
+                    if (!seek_on_change){music_seekbar.setProgress(song_player.getCurrentPosition());}
                 }
             },0,40);
         } catch (IOException e) {
-            Toast.makeText(MainActivity.this,"failed",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"qwq出问题了！",Toast.LENGTH_SHORT).show();
             throw new RuntimeException(e);
         }
     }
@@ -194,23 +198,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         song_player.stop();
         play_pause.setImageResource(R.drawable.ic_play_bar_btn_play);
         switch (ssl_button_i) {
-            case 0 -> {
-                play_pause.setImageResource(R.drawable.ic_play_bar_btn_pause);
-                play_music(p);
-            }
+            case 0 -> play_music(p);
             case 1 -> {
                 if ((p + 1) == R_sing_list.size()) {
                     play_music(0);
                 } else {
                     play_music(p + 1);
                 }
-                play_pause.setImageResource(R.drawable.ic_play_bar_btn_pause);
             }
             case 2 -> {
                 Random random = new Random();
                 int r = random.nextInt(R_sing_list.size());
                 play_music(r);
-                play_pause.setImageResource(R.drawable.ic_play_bar_btn_pause);
             }
         }
     }
@@ -220,15 +219,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String time_now = song_time_into_txt((long) seekBar.getProgress());
             sing_time_now.setText(time_now);
         }
-
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-            seek_on_change=1;
+            seek_on_change=true;
         }
-
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            seek_on_change=0;
+            seek_on_change=false;
             song_player.seekTo(music_seekbar.getProgress());
         }
     }
@@ -280,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Uri uri = data.getData();
                         String song_name = getSongName(uri);
                         String singer_name=getSingerName(uri);
-                        String path = Environment.getExternalStorageDirectory().getPath()+"/自己的文件夹/歌/"+song_name;
+                        String path = getSongPath(uri);
                         String time = song_time_into_txt(getMusicDuration(uri));
                         Write_into_sql(song_name,singer_name,path,time);
                     }
@@ -327,6 +324,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fileName = uri.getLastPathSegment();
         }
         return fileName;
+    }
+    private String getSongPath(Uri uri){
+        return Environment.getExternalStorageDirectory().getPath()+"/自己的文件夹/歌/"+getSongName(uri);
     }
     private String getSingerName(Uri uri) {
         String[] projection = { MediaStore.Images.Media.ARTIST };
@@ -375,7 +375,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             holder.sing_length.setText(sing.getSing_length_txt());
             holder.itemView.setOnClickListener(v -> {
                 if (mItemClickListener != null) {
-                    seek_on_change=1;
                     mItemClickListener.onItemClick(position);
                 }
             });
@@ -390,7 +389,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void setOnItemClickListener(OnItemClickListener listener) {
             mItemClickListener = listener;
         }
-
     }
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView sing_name,singer_name,sing_length;
@@ -402,7 +400,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sing_length = itemView.findViewById(R.id.sing_length);
             sing_list = itemView.findViewById(R.id.sing_list);
         }
-
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
