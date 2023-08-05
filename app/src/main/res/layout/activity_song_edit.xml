@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/black1"
+    android:background="@drawable/bgcolor"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_menu"
-            android:background="@color/black1"/>
+            android:background="@color/no_color"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="60dp"
@@ -26,7 +26,7 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/baseline_settings_24"
-            android:background="@color/black1"/>
+            android:background="@color/no_color"/>
     </LinearLayout>
 
 </LinearLayout>

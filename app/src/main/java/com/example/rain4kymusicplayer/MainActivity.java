@@ -247,6 +247,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (cursor != null) {cursor.close();}
     }
+    private void sendMessageToService(String message) {
+        Intent intent = new Intent(this, MusicPlayService.class);
+        intent.setAction("com.example.MY_ACTION");
+        intent.putExtra("message", message);
+        sendBroadcast(intent);
+    }
     public void get_music(){
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("audio/*"); // 只选择音频文件
